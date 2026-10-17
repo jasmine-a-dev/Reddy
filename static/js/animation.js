@@ -5,7 +5,7 @@
    ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
-    const mobileQuery = window.matchMedia("(max-width: 600px)");
+        const mobileQuery = window.matchMedia("(max-width: 0px)");
     const reducedMotionQuery = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
     );
@@ -216,9 +216,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Keep everything visible if animations are disabled
     // or the browser does not support IntersectionObserver.
-            if (
+                 if (
         reducedMotion.matches ||
-        !("IntersectionObserver" in window)
+        !("IntersectionObserver" in window) ||
+        window.matchMedia("(max-width: 900px)").matches
     ) {
         return;
     }

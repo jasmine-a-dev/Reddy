@@ -102,3 +102,39 @@ document.addEventListener("DOMContentLoaded", function () {
       .forEach(function (el) { seen.observe(el); });
   }, 100);
 });
+/* Phone: reveal blocks as they scroll into view */
+document.addEventListener("DOMContentLoaded", function () {
+  if (!window.matchMedia("(max-width: 900px)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!("IntersectionObserver" in window)) return;
+
+  var selector = [
+    ".hero-stats",
+    ".section-header",
+    ".category",
+    ".property-card",
+    ".why-card",
+    ".center",
+    ".footer-container > *"
+  ].join(",");
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("ph-hide");
+      } else if (entry.boundingClientRect.top > 0) {
+        // only hide again when it is below the screen (scrolling back up)
+        entry.target.classList.add("ph-hide");
+      }
+    });
+  }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
+
+  document.querySelectorAll(selector).forEach(function (el) {
+    el.classList.add("ph-reveal");
+    // hide at the start only if it is below the first screen
+    if (el.getBoundingClientRect().top > window.innerHeight) {
+      el.classList.add("ph-hide");
+    }
+    io.observe(el);
+  });
+});

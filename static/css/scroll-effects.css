@@ -131,13 +131,130 @@ html, body {
   }
 }
 /* ---------- Mobile: appear once, then stay visible ---------- */
+/* ---------- PHONE FIX: never hide anything, slide up instead ---------- */
 @media (max-width: 900px) {
-  html.re-scroll-animations-ready .re-scroll-animate.re-seen,
-  .re-vp-animate.re-seen,
-  html.re-scroll-animations-ready .re-home-carousel-active .re-scroll-animate {
+  html.re-scroll-animations-ready body .re-scroll-animate,
+  html.re-scroll-animations-ready body .re-scroll-animate:not(.is-in-view),
+  html.re-scroll-animations-ready body .re-scroll-animate.is-in-view,
+  body .re-vp-animate,
+  body .re-vp-animate:not(.re-vp-visible) {
     opacity: 1 !important;
-    translate: none !important;
-    scale: 1 !important;
+    transform: none !important;
     filter: none !important;
+    scale: 1 !important;
+    transition: none !important;
+  }
+}
+
+/* Simple slide-up as each block scrolls into view (CSS only, no waiting) */
+@keyframes re-rise {
+  from { translate: 0 40px; }
+  to   { translate: 0 0; }
+}
+
+/* ---------- PHONE FIX: never hide anything, slide up instead ---------- */
+@media (max-width: 900px) {
+  html.re-scroll-animations-ready body .re-scroll-animate,
+  html.re-scroll-animations-ready body .re-scroll-animate:not(.is-in-view),
+  html.re-scroll-animations-ready body .re-scroll-animate.is-in-view,
+  body .re-vp-animate,
+  body .re-vp-animate:not(.re-vp-visible) {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    scale: 1 !important;
+    transition: none !important;
+  }
+}
+
+/* Simple slide-up as each block scrolls into view (CSS only, no waiting) */
+@keyframes re-rise {
+  from { translate: 0 40px; }
+  to   { translate: 0 0; }
+}
+
+/* ---------- PHONE FIX: never hide anything, slide up instead ---------- */
+@media (max-width: 900px) {
+  html.re-scroll-animations-ready body .re-scroll-animate,
+  html.re-scroll-animations-ready body .re-scroll-animate:not(.is-in-view),
+  html.re-scroll-animations-ready body .re-scroll-animate.is-in-view,
+  body .re-vp-animate,
+  body .re-vp-animate:not(.re-vp-visible) {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    scale: 1 !important;
+    transition: none !important;
+  }
+}
+
+/* Simple slide-up as each block scrolls into view (CSS only, no waiting) */
+/* ---------- PHONE: simple reveal (own class names) ---------- */
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .ph-reveal {
+    transition: opacity 0.5s ease, translate 0.5s ease;
+  }
+  .ph-reveal.ph-hide {
+    opacity: 0;
+    translate: 0 36px;
+  }
+}
+/* ---------- PHONE / TABLET: clean card layout ---------- */
+@media (max-width: 900px) {
+  body .category-grid,
+  body .why-grid,
+  body .property-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 16px !important;
+    transform: none !important;
+    align-items: stretch !important;
+  }
+
+  body .category,
+  body .why-card,
+  body .property-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 20px 14px !important;
+    flex: none !important;
+  }
+
+  body .property-card {
+    padding: 0 !important;
+  }
+
+  body .empty-state {
+    grid-column: 1 / -1 !important;
+  }
+
+  body .re-home-carousel-viewport {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  body .re-home-carousel-dots {
+    display: none !important;
+  }
+}
+
+/* Small phones: one card per row */
+@media (max-width: 600px) {
+  body .category-grid,
+  body .why-grid,
+  body .property-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  body .category,
+  body .why-card {
+    padding: 22px 18px !important;
   }
 }
